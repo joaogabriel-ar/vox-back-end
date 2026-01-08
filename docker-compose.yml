@@ -1,0 +1,72 @@
+version: '3.8'
+
+services:
+  vox-back-end:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: vox-back-end
+    image: vox-back-end:dev
+    ports:
+      - "4000:4000"
+      - "9229:9229"
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5431/vox_db
+      - DATABASE_HOST=postgres
+      - DATABASE_PORT=5431
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=postgres
+      - DATABASE_NAME=vox_db
+    volumes:
+      - ./src:/app/src
+      - /app/node_modules
+    # depends_on:
+    #   - postgres
+    networks:
+      - vox-network
+    restart: unless-stopped
+
+  # postgres:
+  #   image: postgres:15-alpine
+  #   container_name: vox-postgres
+  #   environment:
+  #     - POSTGRES_USER=postgres
+  #     - POSTGRES_PASSWORD=postgres
+  #     - POSTGRES_DB=vox_db
+  #   ports:
+  #     - "5431:5431"
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   networks:
+  #     - vox-network
+  #   restart: unless-stopped
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "pg_isready -U postgres"]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 5
+
+  # pgadmin:
+  #   image: dpage/pgadmin4
+  #   container_name: vox-pgadmin
+  #   environment:
+  #     - PGADMIN_DEFAULT_EMAIL=admin@vox.com
+  #     - PGADMIN_DEFAULT_PASSWORD=admin
+  #   ports:
+  #     - "5050:80"
+  #   volumes:
+  #     - pgadmin_data:/var/lib/pgadmin
+  #   depends_on:
+  #     - postgres
+  #   networks:
+  #     - vox-network
+  #   restart: unless-stopped
+
+# volumes:
+#   postgres_data:
+#   pgadmin_data:
+
+networks:
+  vox-network:
+    driver: bridge
