@@ -2,17 +2,28 @@ FROM node:25-bullseye
 
 WORKDIR /app
 
-RUN groupadd -r voxuser && useradd -r -g voxuser voxuser
+RUN npm install -g @nestjs/cli typescript prisma
 
-RUN npm install -g @nestjs/cli typescript
+ARG USER_ID=1000
+ARG GROUP_ID=1000
 
-COPY package.json yarn.lock* ./
+RUN groupmod -g ${GROUP_ID} node && \
+    usermod -u ${USER_ID} -g ${GROUP_ID} node && \
+    chown -R node:node /app
+
+USER node
+
+COPY --chown=node:node package.json yarn.lock* ./
+
 RUN yarn install --frozen-lockfile
 
 COPY tsconfig*.json ./
 COPY nest-cli.json ./
 
-RUN chown -R voxuser:voxuser /app
+COPY prisma ./prisma
 
-USER voxuser
-CMD ["yarn", "start:dev"]
+RUN yarn prisma generate
+
+COPY --chown=node:node . .
+
+CMD ["sleep", "infinity"]
