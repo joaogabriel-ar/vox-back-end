@@ -6,7 +6,7 @@ export class User {
         example: 1,
         type: Number
     })
-    id: number;
+    id?: number;
 
     @ApiProperty({
         description: 'User email address',
@@ -23,6 +23,13 @@ export class User {
     name: string;
 
     @ApiProperty({
+        description: 'Role of the user',
+        example: 1,
+        type: Number,
+    })
+    role_id: number;
+
+    @ApiProperty({
         description: 'User password',
         example: 'StrongP@ssw0rd',
         type: String,
@@ -34,12 +41,12 @@ export class User {
         example: '2024-01-15T10:30:00.000Z',
         type: Date
     })
-    createdAt: Date;
+    created_at?: Date;
 
     @ApiProperty({
         description: 'User last update timestamp',
         example: '2024-01-15T10:30:00.000Z',
         type: Date
     })
-    updatedAt: Date;
+    updated_at?: Date;
 }

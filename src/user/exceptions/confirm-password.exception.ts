@@ -1,11 +1,11 @@
 import { HttpException, HttpStatus } from "@nestjs/common";
 import CustomExceptionsCode from "src/enums/exceptions.enum";
 
-export class DuplicateEmailException extends HttpException {
+export class ConfirmPasswordException extends HttpException {
 
     constructor() {
         super({
-            message: "Duplicate email",
+            message: "Confirm password different from password",
             code: CustomExceptionsCode.DUPLICATE_EMAIL
         }, HttpStatus.BAD_REQUEST)
     }

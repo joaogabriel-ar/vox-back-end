@@ -6,6 +6,8 @@ import * as bcrypt from 'bcrypt';
 import { UserNotFoundException } from './exceptions/user-not-found.exception';
 import { User } from './entities/user.entity';
 import { DuplicateEmailException } from './exceptions/duplicate-email.exception';
+import { ConfirmPasswordException } from './exceptions/confirm-password.exception';
+import Role from 'src/enums/role.enum';
 
 @Injectable()
 
@@ -17,16 +19,17 @@ export class UserService {
 
 	async create(createUserDto: CreateUserDto) {
 
+		if (createUserDto.confirm_password !== createUserDto.password) throw new ConfirmPasswordException();
+
 		const newUser: CreateUserDto = {
 			...createUserDto,
-			password: await bcrypt.hash(createUserDto.password, this.salt)
+			password: await bcrypt.hash(createUserDto.password, this.salt),
+			role_id: Role.USER
 		}
 
 		let existingUser = await this.findEmail(createUserDto.email);
 
-		if (existingUser) {
-			throw new DuplicateEmailException()
-		}
+		if (existingUser) throw new DuplicateEmailException();
 
 		return this.userRepository.create(newUser);
 

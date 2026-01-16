@@ -15,14 +15,14 @@ export const seedUsers = async () => {
         where: { email: "alice@prisma.io" },
         update: {},
         create: {
+            role_id: 1,
             name: "Admin",
             email: "admin@admin.com",
             password: "$2a$10$haJiF4eUABNAk9AXqY3wquWlZjZ/sy/dMoOF/pj6dnKdXjpEag7RW"
         },
     });
 
-    console.log(`✅ Seeded ${[admin].length} users`);
-    return { admin };
+    console.log(`✅ Seeded users`);
 };
 
 export type SeededUsers = Awaited<ReturnType<typeof seedUsers>>;

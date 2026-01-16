@@ -20,7 +20,7 @@ const config: runtime.GetPrismaClientConfig = {
   "clientVersion": "7.2.0",
   "engineVersion": "0c8ef2ce45c83248ab3df073180d5eda9e8be7a3",
   "activeProvider": "postgresql",
-  "inlineSchema": "generator client {\n  provider     = \"prisma-client\"\n  output       = \"./generated\"\n  moduleFormat = \"cjs\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel User {\n  id        Int      @id @default(autoincrement())\n  email     String   @unique\n  name      String\n  password  String   @unique\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@map(\"users\")\n}\n",
+  "inlineSchema": "generator client {\n  provider     = \"prisma-client\"\n  output       = \"./generated\"\n  moduleFormat = \"cjs\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel User {\n  id              Int          @id @default(autoincrement())\n  email           String       @unique\n  name            String\n  profile_picture String?\n  password        String       @unique\n  servers         ServerUser[]\n  role_id         Int\n  created_at      DateTime     @default(now())\n  updated_at      DateTime     @updatedAt\n\n  role  Role     @relation(fields: [role_id], references: [id])\n  serve Server[]\n\n  @@map(\"users\")\n}\n\nmodel Server {\n  id           Int          @id @default(autoincrement())\n  name         String\n  server_image String?\n  is_public    Boolean\n  created_at   DateTime     @default(now())\n  updated_at   DateTime     @updatedAt\n  owner_id     Int\n  owner        User         @relation(fields: [owner_id], references: [id], onDelete: Cascade)\n  users        ServerUser[]\n\n  @@map(\"servers\")\n}\n\nmodel ServerUser {\n  id             Int        @id @default(autoincrement())\n  server_id      Int\n  user_id        Int\n  server_role_id Int\n  server         Server     @relation(fields: [server_id], references: [id], onDelete: Cascade)\n  serverRole     ServerRole @relation(fields: [server_role_id], references: [id])\n  user           User       @relation(fields: [user_id], references: [id])\n  created_at     DateTime   @default(now())\n  updated_at     DateTime   @updatedAt\n\n  @@map(\"server_user\")\n}\n\nmodel Role {\n  id         Int      @id @default(autoincrement())\n  name       String\n  users      User[]\n  created_at DateTime @default(now())\n  updated_at DateTime @updatedAt\n\n  @@map(\"roles\")\n}\n\nmodel ServerRole {\n  id         Int          @id @default(autoincrement())\n  name       String\n  serverUser ServerUser[]\n  created_at DateTime     @default(now())\n  updated_at DateTime     @updatedAt\n\n  @@map(\"server_role\")\n}\n",
   "runtimeDataModel": {
     "models": {},
     "enums": {},
@@ -28,7 +28,7 @@ const config: runtime.GetPrismaClientConfig = {
   }
 }
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":\"users\"}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"profile_picture\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"servers\",\"kind\":\"object\",\"type\":\"ServerUser\",\"relationName\":\"ServerUserToUser\"},{\"name\":\"role_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"created_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updated_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"role\",\"kind\":\"object\",\"type\":\"Role\",\"relationName\":\"RoleToUser\"},{\"name\":\"serve\",\"kind\":\"object\",\"type\":\"Server\",\"relationName\":\"ServerToUser\"}],\"dbName\":\"users\"},\"Server\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"server_image\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"is_public\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"created_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updated_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"owner_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"owner\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"ServerToUser\"},{\"name\":\"users\",\"kind\":\"object\",\"type\":\"ServerUser\",\"relationName\":\"ServerToServerUser\"}],\"dbName\":\"servers\"},\"ServerUser\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"server_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"user_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"server_role_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"server\",\"kind\":\"object\",\"type\":\"Server\",\"relationName\":\"ServerToServerUser\"},{\"name\":\"serverRole\",\"kind\":\"object\",\"type\":\"ServerRole\",\"relationName\":\"ServerRoleToServerUser\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"ServerUserToUser\"},{\"name\":\"created_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updated_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":\"server_user\"},\"Role\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"users\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"RoleToUser\"},{\"name\":\"created_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updated_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":\"roles\"},\"ServerRole\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"serverUser\",\"kind\":\"object\",\"type\":\"ServerUser\",\"relationName\":\"ServerRoleToServerUser\"},{\"name\":\"created_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updated_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":\"server_role\"}},\"enums\":{},\"types\":{}}")
 
 async function decodeBase64AsWasm(wasmBase64: string): Promise<WebAssembly.Module> {
   const { Buffer } = await import('node:buffer')
@@ -183,6 +183,46 @@ export interface PrismaClient<
     * ```
     */
   get user(): Prisma.UserDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.server`: Exposes CRUD operations for the **Server** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Servers
+    * const servers = await prisma.server.findMany()
+    * ```
+    */
+  get server(): Prisma.ServerDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.serverUser`: Exposes CRUD operations for the **ServerUser** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ServerUsers
+    * const serverUsers = await prisma.serverUser.findMany()
+    * ```
+    */
+  get serverUser(): Prisma.ServerUserDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.role`: Exposes CRUD operations for the **Role** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Roles
+    * const roles = await prisma.role.findMany()
+    * ```
+    */
+  get role(): Prisma.RoleDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.serverRole`: Exposes CRUD operations for the **ServerRole** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ServerRoles
+    * const serverRoles = await prisma.serverRole.findMany()
+    * ```
+    */
+  get serverRole(): Prisma.ServerRoleDelegate<ExtArgs, { omit: OmitOpts }>;
 }
 
 export function getPrismaClientClass(): PrismaClientConstructor {

@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus } from "@nestjs/common";
 import CustomExceptionsCode from "src/enums/exceptions.enum";
 
-export class UserNotFoundException extends HttpException {
+export class ServerNotFoundException extends HttpException {
 
     constructor() {
         super({

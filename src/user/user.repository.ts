@@ -1,10 +1,9 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaService } from 'src/prisma.service';
 import { User } from './entities/user.entity';
 import { UserNotFoundException } from './exceptions/user-not-found.exception';
-import { Prisma } from 'prisma/generated/client';
 
 @Injectable()
 
@@ -13,7 +12,10 @@ export class UserRepository {
     constructor(private readonly prismaService: PrismaService) { }
 
     async create(createUserDto: CreateUserDto): Promise<User> {
-        return this.prismaService.user.create({ data: createUserDto })
+
+        const { confirm_password, ...newUser } = createUserDto;
+
+        return this.prismaService.user.create({ data: newUser })
     }
 
     async findAll() {

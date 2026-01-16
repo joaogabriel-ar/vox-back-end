@@ -42,3 +42,23 @@ export { Prisma }
  * 
  */
 export type User = Prisma.UserModel
+/**
+ * Model Server
+ * 
+ */
+export type Server = Prisma.ServerModel
+/**
+ * Model ServerUser
+ * 
+ */
+export type ServerUser = Prisma.ServerUserModel
+/**
+ * Model Role
+ * 
+ */
+export type Role = Prisma.RoleModel
+/**
+ * Model ServerRole
+ * 
+ */
+export type ServerRole = Prisma.ServerRoleModel

@@ -7,6 +7,7 @@ import { ApiBearerAuth } from '@nestjs/swagger';
 import currentUserDecorator from './guard/current-user.decorator';
 import { UserNotAuthenticatedException } from './exceptions/user-not-authenticated.exception';
 import { JwtAuthGuard } from './guard/jwt-auth.guard';
+import type { IAuthUser } from 'src/interfaces/authUser.interface';
 
 @ApiBearerAuth('JWT-auth')
 @UseGuards(JwtAuthGuard)
@@ -32,7 +33,7 @@ export class AuthController {
 	}
 
 	@Get('me')
-	me(@currentUserDecorator() user) {
+	me(@currentUserDecorator() user: IAuthUser) {
 
 		if (!user) {
 			throw new UserNotAuthenticatedException();

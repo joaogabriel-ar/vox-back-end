@@ -1,5 +1,5 @@
 import { HttpException, HttpStatus } from "@nestjs/common";
-import CustomExceptionsCode from "src/enums/exceptionsEnum";
+import CustomExceptionsCode from "src/enums/exceptions.enum";
 
 export class InvalidCredentialsException extends HttpException {
 

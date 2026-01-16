@@ -9,12 +9,66 @@ datasource db {
 }
 
 model User {
-  id        Int     @id @default(autoincrement())
-  email     String  @unique
-  name      String
-  password String @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
+  id             Int      @id @default(autoincrement())
+  email          String   @unique
+  name           String
+  profile_picture String?
+  password       String   @unique
+  servers        ServerUser[]
+  role_id        Int
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
+  
+  role           Role     @relation(fields: [role_id], references: [id])
+  serve Server[]
+  
   @@map("users")
+}
+
+model Server {
+  id          Int      @id @default(autoincrement())
+  name        String
+  server_image String?
+  is_public   Boolean
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+  owner_id  Int
+  owner User @relation(fields: [owner_id], references: [id], onDelete: Cascade)
+  users       ServerUser[]
+
+  @@map("servers")
+}
+
+model ServerUser {
+  id        Int     @id @default(autoincrement())
+  server_id Int     
+  user_id   Int     
+  server_role_id   Int     
+  server    Server  @relation(fields: [server_id], references: [id], onDelete: Cascade)
+  serverRole   ServerRole  @relation(fields: [server_role_id], references: [id])
+  user      User    @relation(fields: [user_id], references: [id])
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("server_user")
+}
+
+model Role {
+  id        Int     @id @default(autoincrement())
+  name      String
+  users     User[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("roles")
+}
+
+model ServerRole {
+  id        Int     @id @default(autoincrement())
+  name      String
+  serverUser ServerUser[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("server_role")
 }

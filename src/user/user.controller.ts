@@ -4,12 +4,14 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { UserService } from './user.service';
 import { JwtAuthGuard } from 'src/auth/guard/jwt-auth.guard';
 import { User } from './entities/user.entity';
+import { Public } from 'src/decorators/public.decorator';
 
 @UseGuards(JwtAuthGuard)
 @Controller('users')
 export class UserController {
 	constructor(private readonly userService: UserService) { }
 
+	@Public()
 	@Post()
 	create(@Body() createUserDto: CreateUserDto): Promise<User | undefined> {
 		return this.userService.create(createUserDto);
