@@ -21,16 +21,7 @@ export class CreateServerDto {
     })
     @IsOptional()
     @IsString({ message: 'Server image must be a valid URL string' })
-    server_image?: string;
-
-    @ApiProperty({
-        description: 'User who owns the server',
-        example: '1',
-        required: false
-    })
-    @IsInt({ message: 'Password must be a string' })
-    @Optional()
-    owner_id: number;
+    server_image?: string | null;
 
     @ApiProperty({
         example: true,

@@ -1,12 +1,12 @@
 import { HttpException, HttpStatus } from "@nestjs/common";
 import CustomExceptionsCode from "src/enums/exceptions.enum";
 
-export class ServerNotFoundException extends HttpException {
+export class UserAlreadyInGroup extends HttpException {
 
     constructor() {
         super({
-            message: "Server not found",
-            code: CustomExceptionsCode.SERVER_NOT_FOUND
+            message: "User is already in this group",
+            code: CustomExceptionsCode.USER_NOT_FOUND
         }, HttpStatus.NOT_FOUND)
     }
 

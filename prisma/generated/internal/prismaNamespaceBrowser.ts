@@ -54,6 +54,8 @@ export const ModelName = {
   User: 'User',
   Server: 'Server',
   ServerUser: 'ServerUser',
+  ServerSolicitation: 'ServerSolicitation',
+  ServerSolicitationStatus: 'ServerSolicitationStatus',
   Role: 'Role',
   ServerRole: 'ServerRole'
 } as const
@@ -111,6 +113,26 @@ export const ServerUserScalarFieldEnum = {
 } as const
 
 export type ServerUserScalarFieldEnum = (typeof ServerUserScalarFieldEnum)[keyof typeof ServerUserScalarFieldEnum]
+
+
+export const ServerSolicitationScalarFieldEnum = {
+  id: 'id',
+  server_id: 'server_id',
+  user_id: 'user_id',
+  status_id: 'status_id',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type ServerSolicitationScalarFieldEnum = (typeof ServerSolicitationScalarFieldEnum)[keyof typeof ServerSolicitationScalarFieldEnum]
+
+
+export const ServerSolicitationStatusScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+} as const
+
+export type ServerSolicitationStatusScalarFieldEnum = (typeof ServerSolicitationStatusScalarFieldEnum)[keyof typeof ServerSolicitationStatusScalarFieldEnum]
 
 
 export const RoleScalarFieldEnum = {

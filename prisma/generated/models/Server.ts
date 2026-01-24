@@ -238,6 +238,7 @@ export type ServerWhereInput = {
   owner_id?: Prisma.IntFilter<"Server"> | number
   owner?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   users?: Prisma.ServerUserListRelationFilter
+  serverSolicitations?: Prisma.ServerSolicitationListRelationFilter
 }
 
 export type ServerOrderByWithRelationInput = {
@@ -250,6 +251,7 @@ export type ServerOrderByWithRelationInput = {
   owner_id?: Prisma.SortOrder
   owner?: Prisma.UserOrderByWithRelationInput
   users?: Prisma.ServerUserOrderByRelationAggregateInput
+  serverSolicitations?: Prisma.ServerSolicitationOrderByRelationAggregateInput
 }
 
 export type ServerWhereUniqueInput = Prisma.AtLeast<{
@@ -265,6 +267,7 @@ export type ServerWhereUniqueInput = Prisma.AtLeast<{
   owner_id?: Prisma.IntFilter<"Server"> | number
   owner?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   users?: Prisma.ServerUserListRelationFilter
+  serverSolicitations?: Prisma.ServerSolicitationListRelationFilter
 }, "id">
 
 export type ServerOrderByWithAggregationInput = {
@@ -303,6 +306,7 @@ export type ServerCreateInput = {
   updated_at?: Date | string
   owner: Prisma.UserCreateNestedOneWithoutServeInput
   users?: Prisma.ServerUserCreateNestedManyWithoutServerInput
+  serverSolicitations?: Prisma.ServerSolicitationCreateNestedManyWithoutServerInput
 }
 
 export type ServerUncheckedCreateInput = {
@@ -314,6 +318,7 @@ export type ServerUncheckedCreateInput = {
   updated_at?: Date | string
   owner_id: number
   users?: Prisma.ServerUserUncheckedCreateNestedManyWithoutServerInput
+  serverSolicitations?: Prisma.ServerSolicitationUncheckedCreateNestedManyWithoutServerInput
 }
 
 export type ServerUpdateInput = {
@@ -324,6 +329,7 @@ export type ServerUpdateInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owner?: Prisma.UserUpdateOneRequiredWithoutServeNestedInput
   users?: Prisma.ServerUserUpdateManyWithoutServerNestedInput
+  serverSolicitations?: Prisma.ServerSolicitationUpdateManyWithoutServerNestedInput
 }
 
 export type ServerUncheckedUpdateInput = {
@@ -335,6 +341,7 @@ export type ServerUncheckedUpdateInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owner_id?: Prisma.IntFieldUpdateOperationsInput | number
   users?: Prisma.ServerUserUncheckedUpdateManyWithoutServerNestedInput
+  serverSolicitations?: Prisma.ServerSolicitationUncheckedUpdateManyWithoutServerNestedInput
 }
 
 export type ServerCreateManyInput = {
@@ -480,6 +487,20 @@ export type ServerUpdateOneRequiredWithoutUsersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ServerUpdateToOneWithWhereWithoutUsersInput, Prisma.ServerUpdateWithoutUsersInput>, Prisma.ServerUncheckedUpdateWithoutUsersInput>
 }
 
+export type ServerCreateNestedOneWithoutServerSolicitationsInput = {
+  create?: Prisma.XOR<Prisma.ServerCreateWithoutServerSolicitationsInput, Prisma.ServerUncheckedCreateWithoutServerSolicitationsInput>
+  connectOrCreate?: Prisma.ServerCreateOrConnectWithoutServerSolicitationsInput
+  connect?: Prisma.ServerWhereUniqueInput
+}
+
+export type ServerUpdateOneRequiredWithoutServerSolicitationsNestedInput = {
+  create?: Prisma.XOR<Prisma.ServerCreateWithoutServerSolicitationsInput, Prisma.ServerUncheckedCreateWithoutServerSolicitationsInput>
+  connectOrCreate?: Prisma.ServerCreateOrConnectWithoutServerSolicitationsInput
+  upsert?: Prisma.ServerUpsertWithoutServerSolicitationsInput
+  connect?: Prisma.ServerWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ServerUpdateToOneWithWhereWithoutServerSolicitationsInput, Prisma.ServerUpdateWithoutServerSolicitationsInput>, Prisma.ServerUncheckedUpdateWithoutServerSolicitationsInput>
+}
+
 export type ServerCreateWithoutOwnerInput = {
   name: string
   server_image?: string | null
@@ -487,6 +508,7 @@ export type ServerCreateWithoutOwnerInput = {
   created_at?: Date | string
   updated_at?: Date | string
   users?: Prisma.ServerUserCreateNestedManyWithoutServerInput
+  serverSolicitations?: Prisma.ServerSolicitationCreateNestedManyWithoutServerInput
 }
 
 export type ServerUncheckedCreateWithoutOwnerInput = {
@@ -497,6 +519,7 @@ export type ServerUncheckedCreateWithoutOwnerInput = {
   created_at?: Date | string
   updated_at?: Date | string
   users?: Prisma.ServerUserUncheckedCreateNestedManyWithoutServerInput
+  serverSolicitations?: Prisma.ServerSolicitationUncheckedCreateNestedManyWithoutServerInput
 }
 
 export type ServerCreateOrConnectWithoutOwnerInput = {
@@ -545,6 +568,7 @@ export type ServerCreateWithoutUsersInput = {
   created_at?: Date | string
   updated_at?: Date | string
   owner: Prisma.UserCreateNestedOneWithoutServeInput
+  serverSolicitations?: Prisma.ServerSolicitationCreateNestedManyWithoutServerInput
 }
 
 export type ServerUncheckedCreateWithoutUsersInput = {
@@ -555,6 +579,7 @@ export type ServerUncheckedCreateWithoutUsersInput = {
   created_at?: Date | string
   updated_at?: Date | string
   owner_id: number
+  serverSolicitations?: Prisma.ServerSolicitationUncheckedCreateNestedManyWithoutServerInput
 }
 
 export type ServerCreateOrConnectWithoutUsersInput = {
@@ -580,6 +605,7 @@ export type ServerUpdateWithoutUsersInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owner?: Prisma.UserUpdateOneRequiredWithoutServeNestedInput
+  serverSolicitations?: Prisma.ServerSolicitationUpdateManyWithoutServerNestedInput
 }
 
 export type ServerUncheckedUpdateWithoutUsersInput = {
@@ -590,6 +616,65 @@ export type ServerUncheckedUpdateWithoutUsersInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owner_id?: Prisma.IntFieldUpdateOperationsInput | number
+  serverSolicitations?: Prisma.ServerSolicitationUncheckedUpdateManyWithoutServerNestedInput
+}
+
+export type ServerCreateWithoutServerSolicitationsInput = {
+  name: string
+  server_image?: string | null
+  is_public: boolean
+  created_at?: Date | string
+  updated_at?: Date | string
+  owner: Prisma.UserCreateNestedOneWithoutServeInput
+  users?: Prisma.ServerUserCreateNestedManyWithoutServerInput
+}
+
+export type ServerUncheckedCreateWithoutServerSolicitationsInput = {
+  id?: number
+  name: string
+  server_image?: string | null
+  is_public: boolean
+  created_at?: Date | string
+  updated_at?: Date | string
+  owner_id: number
+  users?: Prisma.ServerUserUncheckedCreateNestedManyWithoutServerInput
+}
+
+export type ServerCreateOrConnectWithoutServerSolicitationsInput = {
+  where: Prisma.ServerWhereUniqueInput
+  create: Prisma.XOR<Prisma.ServerCreateWithoutServerSolicitationsInput, Prisma.ServerUncheckedCreateWithoutServerSolicitationsInput>
+}
+
+export type ServerUpsertWithoutServerSolicitationsInput = {
+  update: Prisma.XOR<Prisma.ServerUpdateWithoutServerSolicitationsInput, Prisma.ServerUncheckedUpdateWithoutServerSolicitationsInput>
+  create: Prisma.XOR<Prisma.ServerCreateWithoutServerSolicitationsInput, Prisma.ServerUncheckedCreateWithoutServerSolicitationsInput>
+  where?: Prisma.ServerWhereInput
+}
+
+export type ServerUpdateToOneWithWhereWithoutServerSolicitationsInput = {
+  where?: Prisma.ServerWhereInput
+  data: Prisma.XOR<Prisma.ServerUpdateWithoutServerSolicitationsInput, Prisma.ServerUncheckedUpdateWithoutServerSolicitationsInput>
+}
+
+export type ServerUpdateWithoutServerSolicitationsInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  server_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_public?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  owner?: Prisma.UserUpdateOneRequiredWithoutServeNestedInput
+  users?: Prisma.ServerUserUpdateManyWithoutServerNestedInput
+}
+
+export type ServerUncheckedUpdateWithoutServerSolicitationsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  server_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_public?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  owner_id?: Prisma.IntFieldUpdateOperationsInput | number
+  users?: Prisma.ServerUserUncheckedUpdateManyWithoutServerNestedInput
 }
 
 export type ServerCreateManyOwnerInput = {
@@ -608,6 +693,7 @@ export type ServerUpdateWithoutOwnerInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.ServerUserUpdateManyWithoutServerNestedInput
+  serverSolicitations?: Prisma.ServerSolicitationUpdateManyWithoutServerNestedInput
 }
 
 export type ServerUncheckedUpdateWithoutOwnerInput = {
@@ -618,6 +704,7 @@ export type ServerUncheckedUpdateWithoutOwnerInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.ServerUserUncheckedUpdateManyWithoutServerNestedInput
+  serverSolicitations?: Prisma.ServerSolicitationUncheckedUpdateManyWithoutServerNestedInput
 }
 
 export type ServerUncheckedUpdateManyWithoutOwnerInput = {
@@ -636,10 +723,12 @@ export type ServerUncheckedUpdateManyWithoutOwnerInput = {
 
 export type ServerCountOutputType = {
   users: number
+  serverSolicitations: number
 }
 
 export type ServerCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   users?: boolean | ServerCountOutputTypeCountUsersArgs
+  serverSolicitations?: boolean | ServerCountOutputTypeCountServerSolicitationsArgs
 }
 
 /**
@@ -659,6 +748,13 @@ export type ServerCountOutputTypeCountUsersArgs<ExtArgs extends runtime.Types.Ex
   where?: Prisma.ServerUserWhereInput
 }
 
+/**
+ * ServerCountOutputType without action
+ */
+export type ServerCountOutputTypeCountServerSolicitationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ServerSolicitationWhereInput
+}
+
 
 export type ServerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -670,6 +766,7 @@ export type ServerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   owner_id?: boolean
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   users?: boolean | Prisma.Server$usersArgs<ExtArgs>
+  serverSolicitations?: boolean | Prisma.Server$serverSolicitationsArgs<ExtArgs>
   _count?: boolean | Prisma.ServerCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["server"]>
 
@@ -709,6 +806,7 @@ export type ServerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
 export type ServerInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   users?: boolean | Prisma.Server$usersArgs<ExtArgs>
+  serverSolicitations?: boolean | Prisma.Server$serverSolicitationsArgs<ExtArgs>
   _count?: boolean | Prisma.ServerCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ServerIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -723,6 +821,7 @@ export type $ServerPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
   objects: {
     owner: Prisma.$UserPayload<ExtArgs>
     users: Prisma.$ServerUserPayload<ExtArgs>[]
+    serverSolicitations: Prisma.$ServerSolicitationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1128,6 +1227,7 @@ export interface Prisma__ServerClient<T, Null = never, ExtArgs extends runtime.T
   readonly [Symbol.toStringTag]: "PrismaPromise"
   owner<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   users<T extends Prisma.Server$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Server$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ServerUserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  serverSolicitations<T extends Prisma.Server$serverSolicitationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Server$serverSolicitationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ServerSolicitationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1581,6 +1681,30 @@ export type Server$usersArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
   take?: number
   skip?: number
   distinct?: Prisma.ServerUserScalarFieldEnum | Prisma.ServerUserScalarFieldEnum[]
+}
+
+/**
+ * Server.serverSolicitations
+ */
+export type Server$serverSolicitationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ServerSolicitation
+   */
+  select?: Prisma.ServerSolicitationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ServerSolicitation
+   */
+  omit?: Prisma.ServerSolicitationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ServerSolicitationInclude<ExtArgs> | null
+  where?: Prisma.ServerSolicitationWhereInput
+  orderBy?: Prisma.ServerSolicitationOrderByWithRelationInput | Prisma.ServerSolicitationOrderByWithRelationInput[]
+  cursor?: Prisma.ServerSolicitationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ServerSolicitationScalarFieldEnum | Prisma.ServerSolicitationScalarFieldEnum[]
 }
 
 /**

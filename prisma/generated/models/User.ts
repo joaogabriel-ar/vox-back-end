@@ -247,6 +247,7 @@ export type UserWhereInput = {
   servers?: Prisma.ServerUserListRelationFilter
   role?: Prisma.XOR<Prisma.RoleScalarRelationFilter, Prisma.RoleWhereInput>
   serve?: Prisma.ServerListRelationFilter
+  serverSolicitations?: Prisma.ServerSolicitationListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -261,24 +262,26 @@ export type UserOrderByWithRelationInput = {
   servers?: Prisma.ServerUserOrderByRelationAggregateInput
   role?: Prisma.RoleOrderByWithRelationInput
   serve?: Prisma.ServerOrderByRelationAggregateInput
+  serverSolicitations?: Prisma.ServerSolicitationOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
   id?: number
   email?: string
-  password?: string
   AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   name?: Prisma.StringFilter<"User"> | string
   profile_picture?: Prisma.StringNullableFilter<"User"> | string | null
+  password?: Prisma.StringFilter<"User"> | string
   role_id?: Prisma.IntFilter<"User"> | number
   created_at?: Prisma.DateTimeFilter<"User"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"User"> | Date | string
   servers?: Prisma.ServerUserListRelationFilter
   role?: Prisma.XOR<Prisma.RoleScalarRelationFilter, Prisma.RoleWhereInput>
   serve?: Prisma.ServerListRelationFilter
-}, "id" | "email" | "password">
+  serverSolicitations?: Prisma.ServerSolicitationListRelationFilter
+}, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -320,6 +323,7 @@ export type UserCreateInput = {
   servers?: Prisma.ServerUserCreateNestedManyWithoutUserInput
   role: Prisma.RoleCreateNestedOneWithoutUsersInput
   serve?: Prisma.ServerCreateNestedManyWithoutOwnerInput
+  serverSolicitations?: Prisma.ServerSolicitationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -333,6 +337,7 @@ export type UserUncheckedCreateInput = {
   updated_at?: Date | string
   servers?: Prisma.ServerUserUncheckedCreateNestedManyWithoutUserInput
   serve?: Prisma.ServerUncheckedCreateNestedManyWithoutOwnerInput
+  serverSolicitations?: Prisma.ServerSolicitationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -345,6 +350,7 @@ export type UserUpdateInput = {
   servers?: Prisma.ServerUserUpdateManyWithoutUserNestedInput
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput
   serve?: Prisma.ServerUpdateManyWithoutOwnerNestedInput
+  serverSolicitations?: Prisma.ServerSolicitationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -358,6 +364,7 @@ export type UserUncheckedUpdateInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   servers?: Prisma.ServerUserUncheckedUpdateManyWithoutUserNestedInput
   serve?: Prisma.ServerUncheckedUpdateManyWithoutOwnerNestedInput
+  serverSolicitations?: Prisma.ServerSolicitationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -497,6 +504,20 @@ export type UserUpdateOneRequiredWithoutServersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutServersInput, Prisma.UserUpdateWithoutServersInput>, Prisma.UserUncheckedUpdateWithoutServersInput>
 }
 
+export type UserCreateNestedOneWithoutServerSolicitationsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutServerSolicitationsInput, Prisma.UserUncheckedCreateWithoutServerSolicitationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutServerSolicitationsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutServerSolicitationsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutServerSolicitationsInput, Prisma.UserUncheckedCreateWithoutServerSolicitationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutServerSolicitationsInput
+  upsert?: Prisma.UserUpsertWithoutServerSolicitationsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutServerSolicitationsInput, Prisma.UserUpdateWithoutServerSolicitationsInput>, Prisma.UserUncheckedUpdateWithoutServerSolicitationsInput>
+}
+
 export type UserCreateNestedManyWithoutRoleInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutRoleInput, Prisma.UserUncheckedCreateWithoutRoleInput> | Prisma.UserCreateWithoutRoleInput[] | Prisma.UserUncheckedCreateWithoutRoleInput[]
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutRoleInput | Prisma.UserCreateOrConnectWithoutRoleInput[]
@@ -548,6 +569,7 @@ export type UserCreateWithoutServeInput = {
   updated_at?: Date | string
   servers?: Prisma.ServerUserCreateNestedManyWithoutUserInput
   role: Prisma.RoleCreateNestedOneWithoutUsersInput
+  serverSolicitations?: Prisma.ServerSolicitationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutServeInput = {
@@ -560,6 +582,7 @@ export type UserUncheckedCreateWithoutServeInput = {
   created_at?: Date | string
   updated_at?: Date | string
   servers?: Prisma.ServerUserUncheckedCreateNestedManyWithoutUserInput
+  serverSolicitations?: Prisma.ServerSolicitationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutServeInput = {
@@ -587,6 +610,7 @@ export type UserUpdateWithoutServeInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   servers?: Prisma.ServerUserUpdateManyWithoutUserNestedInput
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput
+  serverSolicitations?: Prisma.ServerSolicitationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutServeInput = {
@@ -599,6 +623,7 @@ export type UserUncheckedUpdateWithoutServeInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   servers?: Prisma.ServerUserUncheckedUpdateManyWithoutUserNestedInput
+  serverSolicitations?: Prisma.ServerSolicitationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutServersInput = {
@@ -610,6 +635,7 @@ export type UserCreateWithoutServersInput = {
   updated_at?: Date | string
   role: Prisma.RoleCreateNestedOneWithoutUsersInput
   serve?: Prisma.ServerCreateNestedManyWithoutOwnerInput
+  serverSolicitations?: Prisma.ServerSolicitationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutServersInput = {
@@ -622,6 +648,7 @@ export type UserUncheckedCreateWithoutServersInput = {
   created_at?: Date | string
   updated_at?: Date | string
   serve?: Prisma.ServerUncheckedCreateNestedManyWithoutOwnerInput
+  serverSolicitations?: Prisma.ServerSolicitationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutServersInput = {
@@ -649,6 +676,7 @@ export type UserUpdateWithoutServersInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput
   serve?: Prisma.ServerUpdateManyWithoutOwnerNestedInput
+  serverSolicitations?: Prisma.ServerSolicitationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutServersInput = {
@@ -661,6 +689,73 @@ export type UserUncheckedUpdateWithoutServersInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   serve?: Prisma.ServerUncheckedUpdateManyWithoutOwnerNestedInput
+  serverSolicitations?: Prisma.ServerSolicitationUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutServerSolicitationsInput = {
+  email: string
+  name: string
+  profile_picture?: string | null
+  password: string
+  created_at?: Date | string
+  updated_at?: Date | string
+  servers?: Prisma.ServerUserCreateNestedManyWithoutUserInput
+  role: Prisma.RoleCreateNestedOneWithoutUsersInput
+  serve?: Prisma.ServerCreateNestedManyWithoutOwnerInput
+}
+
+export type UserUncheckedCreateWithoutServerSolicitationsInput = {
+  id?: number
+  email: string
+  name: string
+  profile_picture?: string | null
+  password: string
+  role_id: number
+  created_at?: Date | string
+  updated_at?: Date | string
+  servers?: Prisma.ServerUserUncheckedCreateNestedManyWithoutUserInput
+  serve?: Prisma.ServerUncheckedCreateNestedManyWithoutOwnerInput
+}
+
+export type UserCreateOrConnectWithoutServerSolicitationsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutServerSolicitationsInput, Prisma.UserUncheckedCreateWithoutServerSolicitationsInput>
+}
+
+export type UserUpsertWithoutServerSolicitationsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutServerSolicitationsInput, Prisma.UserUncheckedUpdateWithoutServerSolicitationsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutServerSolicitationsInput, Prisma.UserUncheckedCreateWithoutServerSolicitationsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutServerSolicitationsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutServerSolicitationsInput, Prisma.UserUncheckedUpdateWithoutServerSolicitationsInput>
+}
+
+export type UserUpdateWithoutServerSolicitationsInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  profile_picture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  servers?: Prisma.ServerUserUpdateManyWithoutUserNestedInput
+  role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput
+  serve?: Prisma.ServerUpdateManyWithoutOwnerNestedInput
+}
+
+export type UserUncheckedUpdateWithoutServerSolicitationsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  profile_picture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role_id?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  servers?: Prisma.ServerUserUncheckedUpdateManyWithoutUserNestedInput
+  serve?: Prisma.ServerUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type UserCreateWithoutRoleInput = {
@@ -672,6 +767,7 @@ export type UserCreateWithoutRoleInput = {
   updated_at?: Date | string
   servers?: Prisma.ServerUserCreateNestedManyWithoutUserInput
   serve?: Prisma.ServerCreateNestedManyWithoutOwnerInput
+  serverSolicitations?: Prisma.ServerSolicitationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRoleInput = {
@@ -684,6 +780,7 @@ export type UserUncheckedCreateWithoutRoleInput = {
   updated_at?: Date | string
   servers?: Prisma.ServerUserUncheckedCreateNestedManyWithoutUserInput
   serve?: Prisma.ServerUncheckedCreateNestedManyWithoutOwnerInput
+  serverSolicitations?: Prisma.ServerSolicitationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRoleInput = {
@@ -745,6 +842,7 @@ export type UserUpdateWithoutRoleInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   servers?: Prisma.ServerUserUpdateManyWithoutUserNestedInput
   serve?: Prisma.ServerUpdateManyWithoutOwnerNestedInput
+  serverSolicitations?: Prisma.ServerSolicitationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRoleInput = {
@@ -757,6 +855,7 @@ export type UserUncheckedUpdateWithoutRoleInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   servers?: Prisma.ServerUserUncheckedUpdateManyWithoutUserNestedInput
   serve?: Prisma.ServerUncheckedUpdateManyWithoutOwnerNestedInput
+  serverSolicitations?: Prisma.ServerSolicitationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutRoleInput = {
@@ -777,11 +876,13 @@ export type UserUncheckedUpdateManyWithoutRoleInput = {
 export type UserCountOutputType = {
   servers: number
   serve: number
+  serverSolicitations: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   servers?: boolean | UserCountOutputTypeCountServersArgs
   serve?: boolean | UserCountOutputTypeCountServeArgs
+  serverSolicitations?: boolean | UserCountOutputTypeCountServerSolicitationsArgs
 }
 
 /**
@@ -808,6 +909,13 @@ export type UserCountOutputTypeCountServeArgs<ExtArgs extends runtime.Types.Exte
   where?: Prisma.ServerWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountServerSolicitationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ServerSolicitationWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -821,6 +929,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   servers?: boolean | Prisma.User$serversArgs<ExtArgs>
   role?: boolean | Prisma.RoleDefaultArgs<ExtArgs>
   serve?: boolean | Prisma.User$serveArgs<ExtArgs>
+  serverSolicitations?: boolean | Prisma.User$serverSolicitationsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -864,6 +973,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   servers?: boolean | Prisma.User$serversArgs<ExtArgs>
   role?: boolean | Prisma.RoleDefaultArgs<ExtArgs>
   serve?: boolean | Prisma.User$serveArgs<ExtArgs>
+  serverSolicitations?: boolean | Prisma.User$serverSolicitationsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -879,6 +989,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     servers: Prisma.$ServerUserPayload<ExtArgs>[]
     role: Prisma.$RolePayload<ExtArgs>
     serve: Prisma.$ServerPayload<ExtArgs>[]
+    serverSolicitations: Prisma.$ServerSolicitationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1286,6 +1397,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   servers<T extends Prisma.User$serversArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$serversArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ServerUserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   role<T extends Prisma.RoleDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RoleDefaultArgs<ExtArgs>>): Prisma.Prisma__RoleClient<runtime.Types.Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   serve<T extends Prisma.User$serveArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$serveArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ServerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  serverSolicitations<T extends Prisma.User$serverSolicitationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$serverSolicitationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ServerSolicitationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1764,6 +1876,30 @@ export type User$serveArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
   take?: number
   skip?: number
   distinct?: Prisma.ServerScalarFieldEnum | Prisma.ServerScalarFieldEnum[]
+}
+
+/**
+ * User.serverSolicitations
+ */
+export type User$serverSolicitationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ServerSolicitation
+   */
+  select?: Prisma.ServerSolicitationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ServerSolicitation
+   */
+  omit?: Prisma.ServerSolicitationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ServerSolicitationInclude<ExtArgs> | null
+  where?: Prisma.ServerSolicitationWhereInput
+  orderBy?: Prisma.ServerSolicitationOrderByWithRelationInput | Prisma.ServerSolicitationOrderByWithRelationInput[]
+  cursor?: Prisma.ServerSolicitationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ServerSolicitationScalarFieldEnum | Prisma.ServerSolicitationScalarFieldEnum[]
 }
 
 /**

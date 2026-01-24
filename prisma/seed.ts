@@ -4,6 +4,7 @@ import { PrismaClient } from './generated/client'
 import { seedUsers } from './user.seed'
 import { seedRoles } from './role.seed'
 import { seedServerRoles } from './serverRole.seed'
+import { seedServers } from './server.seed'
 
 const connectionString = `${process.env.DATABASE_URL}`
 const adapter = new PrismaPg({ connectionString })
@@ -16,6 +17,7 @@ const seed = async () => {
         await seedRoles();
         await seedServerRoles();
         await seedUsers();
+        await seedServers();
         console.log('✅ Seed completed successfully!')
         
         await prisma.$disconnect()

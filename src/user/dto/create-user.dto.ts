@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, IsString, MaxLength } from "@nestjs/class-validator";
+import { IsEmail, IsInt, IsNotEmpty, IsString, MaxLength } from "@nestjs/class-validator";
 import { Optional } from "@nestjs/common";
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 
@@ -42,11 +42,11 @@ export class CreateUserDto {
     confirm_password: string;
 
     @ApiProperty({
-        description: 'User password',
-        example: 'StrongP@ssw0rd',
+        description: 'User role',
+        example: 1,
         required: true
     })
-    @IsString({ message: 'Password must be a string' })
+    @IsInt({ message: 'role_id must a integer' })
     @Optional()
     role_id: number;
 

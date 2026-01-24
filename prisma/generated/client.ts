@@ -53,6 +53,16 @@ export type Server = Prisma.ServerModel
  */
 export type ServerUser = Prisma.ServerUserModel
 /**
+ * Model ServerSolicitation
+ * 
+ */
+export type ServerSolicitation = Prisma.ServerSolicitationModel
+/**
+ * Model ServerSolicitationStatus
+ * 
+ */
+export type ServerSolicitationStatus = Prisma.ServerSolicitationStatusModel
+/**
  * Model Role
  * 
  */

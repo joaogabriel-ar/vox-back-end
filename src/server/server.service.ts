@@ -1,23 +1,62 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { CreateServerDto } from './dto/create-server.dto';
 import { UpdateServerDto } from './dto/update-server.dto';
 import { ServerRepository } from './server.respository';
 import { ServerNotFoundException } from './exceptions/server-not-found.exception';
 import { IAuthUser } from 'src/interfaces/authUser.interface';
 import { UserNotOwnerException } from './exceptions/user-not-owner.exception';
+import { LocalStorageService } from 'src/storage/local-storage';
 
 @Injectable()
 export class ServerService {
 
-	constructor(private readonly serverRepository: ServerRepository) { }
+	constructor(
+		private readonly serverRepository: ServerRepository,
+		private readonly storageService: LocalStorageService
+	) { }
 
-	async create(createServerDto: CreateServerDto, user: IAuthUser) {
+	async create(createServerDto: CreateServerDto, user: IAuthUser, file: Express.Multer.File) {
 
-		return this.serverRepository.create(createServerDto, user);
+		let filePath: string | null | undefined = null;
+
+		try {
+
+			if (file) {
+				filePath = await this.storageService.saveFile(file, "images");
+			}
+
+			const newServer: CreateServerDto = {
+				...createServerDto,
+				is_public: !!createServerDto.is_public,
+				server_image: filePath
+			}
+
+			return this.serverRepository.create(newServer, user);
+
+		} catch (err: any) {
+
+			if (filePath) {
+
+				await this.storageService.removeFile(filePath);
+			}
+
+			throw new InternalServerErrorException("Internal server error");
+
+		}
+
 	}
 
-	findAll() {
-		return this.serverRepository.findAll();
+	async getImage(imagePath: string) {
+
+		return await this.storageService.getImage(`images/${imagePath}`);
+	}
+
+	findAll(page: number, pageSize: number, search: string) {
+		return this.serverRepository.findAll(page, pageSize, search);
+	}
+
+	findUserGroups(userId: number) {
+		return this.serverRepository.findUserGroups(userId);
 	}
 
 	findOne(id: number) {

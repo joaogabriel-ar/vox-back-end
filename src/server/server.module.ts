@@ -3,6 +3,7 @@ import { ServerService } from './server.service';
 import { ServerController } from './server.controller';
 import { ServerRepository } from './server.respository';
 import { PrismaService } from 'src/prisma.service';
+import { LocalStorageService } from 'src/storage/local-storage';
 
 @Module({
 	controllers: [
@@ -11,7 +12,8 @@ import { PrismaService } from 'src/prisma.service';
 	providers: [
 		ServerService, 
 		ServerRepository, 
-		PrismaService
+		PrismaService,
+		LocalStorageService
 	],
 	exports: [
 		ServerService

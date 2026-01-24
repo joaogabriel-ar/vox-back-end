@@ -11,6 +11,8 @@
 export type * from './models/User.js'
 export type * from './models/Server.js'
 export type * from './models/ServerUser.js'
+export type * from './models/ServerSolicitation.js'
+export type * from './models/ServerSolicitationStatus.js'
 export type * from './models/Role.js'
 export type * from './models/ServerRole.js'
 export type * from './commonInputTypes.js'

@@ -5,7 +5,10 @@ enum CustomExceptionsCode {
     USER_NOT_AUTHENTICATED = 4,
     CONFIRM_PASSWORD_WRONG = 5,
     SERVER_NOT_FOUND = 6,
-    USER_NOT_OWNER = 7
+    USER_NOT_OWNER = 7,
+    FAIL_TO_SAVE_IMAGE = 8,
+    USER_ALREADY_IN_GROUP = 9,
+    SERVER_SOLICITATION_NOT_FOUND = 10,
 }
 
 export default CustomExceptionsCode

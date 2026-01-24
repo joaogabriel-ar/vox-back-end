@@ -5,6 +5,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { env } from 'prisma/config';
 import { PassportModule } from '@nestjs/passport';
 import { ServerModule } from './server/server.module';
+import { ServerSolicitationModule } from './server-solicitation/server-solicitation.module';
 
 @Module({
 	imports: [
@@ -18,6 +19,7 @@ import { ServerModule } from './server/server.module';
 			signOptions: { expiresIn: '1h' },
 		}),
 		ServerModule,
+		ServerSolicitationModule,
 	],
 })
 export class AppModule { }

@@ -13,7 +13,7 @@ model User {
   email          String   @unique
   name           String
   profile_picture String?
-  password       String   @unique
+  password       String
   servers        ServerUser[]
   role_id        Int
   created_at      DateTime @default(now())
@@ -21,6 +21,7 @@ model User {
   
   role           Role     @relation(fields: [role_id], references: [id])
   serve Server[]
+  serverSolicitations  ServerSolicitation[]
   
   @@map("users")
 }
@@ -35,6 +36,7 @@ model Server {
   owner_id  Int
   owner User @relation(fields: [owner_id], references: [id], onDelete: Cascade)
   users       ServerUser[]
+  serverSolicitations  ServerSolicitation[]
 
   @@map("servers")
 }
@@ -52,7 +54,28 @@ model ServerUser {
 
   @@map("server_user")
 }
+model ServerSolicitation {
+  id         Int      @id @default(autoincrement())
+  server_id  Int     
+  user_id    Int     
+  status_id  Int
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
+  server Server                      @relation(fields: [server_id], references: [id])
+  user   User                        @relation(fields: [user_id], references: [id])
+  status ServerSolicitationStatus    @relation(fields: [status_id], references: [id])
+
+  @@map("server_solicitation")
+}
+
+model ServerSolicitationStatus {
+  id                    Int                   @id @default(autoincrement())
+  name                  String                @unique
+  serverSolicitations  ServerSolicitation[]
+
+  @@map("server_solicitation_status")
+}
 model Role {
   id        Int     @id @default(autoincrement())
   name      String

@@ -387,6 +387,8 @@ export const ModelName = {
   User: 'User',
   Server: 'Server',
   ServerUser: 'ServerUser',
+  ServerSolicitation: 'ServerSolicitation',
+  ServerSolicitationStatus: 'ServerSolicitationStatus',
   Role: 'Role',
   ServerRole: 'ServerRole'
 } as const
@@ -404,7 +406,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "server" | "serverUser" | "role" | "serverRole"
+    modelProps: "user" | "server" | "serverUser" | "serverSolicitation" | "serverSolicitationStatus" | "role" | "serverRole"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -627,6 +629,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.ServerUserCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ServerUserCountAggregateOutputType> | number
+        }
+      }
+    }
+    ServerSolicitation: {
+      payload: Prisma.$ServerSolicitationPayload<ExtArgs>
+      fields: Prisma.ServerSolicitationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ServerSolicitationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServerSolicitationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ServerSolicitationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServerSolicitationPayload>
+        }
+        findFirst: {
+          args: Prisma.ServerSolicitationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServerSolicitationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ServerSolicitationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServerSolicitationPayload>
+        }
+        findMany: {
+          args: Prisma.ServerSolicitationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServerSolicitationPayload>[]
+        }
+        create: {
+          args: Prisma.ServerSolicitationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServerSolicitationPayload>
+        }
+        createMany: {
+          args: Prisma.ServerSolicitationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ServerSolicitationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServerSolicitationPayload>[]
+        }
+        delete: {
+          args: Prisma.ServerSolicitationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServerSolicitationPayload>
+        }
+        update: {
+          args: Prisma.ServerSolicitationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServerSolicitationPayload>
+        }
+        deleteMany: {
+          args: Prisma.ServerSolicitationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ServerSolicitationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ServerSolicitationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServerSolicitationPayload>[]
+        }
+        upsert: {
+          args: Prisma.ServerSolicitationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServerSolicitationPayload>
+        }
+        aggregate: {
+          args: Prisma.ServerSolicitationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateServerSolicitation>
+        }
+        groupBy: {
+          args: Prisma.ServerSolicitationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ServerSolicitationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ServerSolicitationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ServerSolicitationCountAggregateOutputType> | number
+        }
+      }
+    }
+    ServerSolicitationStatus: {
+      payload: Prisma.$ServerSolicitationStatusPayload<ExtArgs>
+      fields: Prisma.ServerSolicitationStatusFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ServerSolicitationStatusFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServerSolicitationStatusPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ServerSolicitationStatusFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServerSolicitationStatusPayload>
+        }
+        findFirst: {
+          args: Prisma.ServerSolicitationStatusFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServerSolicitationStatusPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ServerSolicitationStatusFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServerSolicitationStatusPayload>
+        }
+        findMany: {
+          args: Prisma.ServerSolicitationStatusFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServerSolicitationStatusPayload>[]
+        }
+        create: {
+          args: Prisma.ServerSolicitationStatusCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServerSolicitationStatusPayload>
+        }
+        createMany: {
+          args: Prisma.ServerSolicitationStatusCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ServerSolicitationStatusCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServerSolicitationStatusPayload>[]
+        }
+        delete: {
+          args: Prisma.ServerSolicitationStatusDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServerSolicitationStatusPayload>
+        }
+        update: {
+          args: Prisma.ServerSolicitationStatusUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServerSolicitationStatusPayload>
+        }
+        deleteMany: {
+          args: Prisma.ServerSolicitationStatusDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ServerSolicitationStatusUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ServerSolicitationStatusUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServerSolicitationStatusPayload>[]
+        }
+        upsert: {
+          args: Prisma.ServerSolicitationStatusUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServerSolicitationStatusPayload>
+        }
+        aggregate: {
+          args: Prisma.ServerSolicitationStatusAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateServerSolicitationStatus>
+        }
+        groupBy: {
+          args: Prisma.ServerSolicitationStatusGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ServerSolicitationStatusGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ServerSolicitationStatusCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ServerSolicitationStatusCountAggregateOutputType> | number
         }
       }
     }
@@ -856,6 +1006,26 @@ export const ServerUserScalarFieldEnum = {
 export type ServerUserScalarFieldEnum = (typeof ServerUserScalarFieldEnum)[keyof typeof ServerUserScalarFieldEnum]
 
 
+export const ServerSolicitationScalarFieldEnum = {
+  id: 'id',
+  server_id: 'server_id',
+  user_id: 'user_id',
+  status_id: 'status_id',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type ServerSolicitationScalarFieldEnum = (typeof ServerSolicitationScalarFieldEnum)[keyof typeof ServerSolicitationScalarFieldEnum]
+
+
+export const ServerSolicitationStatusScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+} as const
+
+export type ServerSolicitationStatusScalarFieldEnum = (typeof ServerSolicitationStatusScalarFieldEnum)[keyof typeof ServerSolicitationStatusScalarFieldEnum]
+
+
 export const RoleScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -1066,6 +1236,8 @@ export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   server?: Prisma.ServerOmit
   serverUser?: Prisma.ServerUserOmit
+  serverSolicitation?: Prisma.ServerSolicitationOmit
+  serverSolicitationStatus?: Prisma.ServerSolicitationStatusOmit
   role?: Prisma.RoleOmit
   serverRole?: Prisma.ServerRoleOmit
 }
